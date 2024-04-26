@@ -84,19 +84,6 @@
 
     <q-page-container>
       <div class="q-pa-xl main-container">
-        <!-- btn teste -->
-        <div class="q-pa-md q-gutter-sm">
-          <q-btn color="white" text-color="black" label="Home" to="/" />
-        </div>
-        <div class="q-pa-md q-gutter-sm">
-          <q-btn
-            color="white"
-            text-color="black"
-            label="detalhes/3"
-            to="detalhes/3"
-          />
-        </div>
-        <!-- btn teste -->
         <router-view />
       </div>
     </q-page-container>
