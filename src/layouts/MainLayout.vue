@@ -1,36 +1,78 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh Lpr lFf">
+    <q-header reveal bordered class="bg-white">
       <q-toolbar>
+        <!-- Hamburguer -->
         <q-btn
           flat
           dense
           round
+          color="secondary"
           icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
+        <!-- Hamburguer -->
 
-        <q-toolbar-title>
-          Quasar App
+        <!-- Logo Prodemge -->
+        <q-toolbar-title class="row items-center no-wrap">
+          <img class="logo_prodemge" src="/img/logo_prodemge.png" alt="logo_prodemge" />
         </q-toolbar-title>
+        <!-- Logo Prodemge -->
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- Area da direita -->
+        <div class="q-gutter-sm row items-center no-wrap">
+          <!-- Notificações -->
+          <q-btn round dense flat color="secondary" icon="notifications">
+            <q-badge color="primary" text-color="white" floating> 2 </q-badge>
+            <q-tooltip>Notifications</q-tooltip>
+            <q-menu>
+              <q-list>
+                <q-item clickable
+                v-close-popup>
+                  <q-item-section> Notificação #1</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup>
+                  <q-item-section> Notificação #2</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
+
+
+
+          <!-- Notificações -->
+          <q-btn round flat>
+            <q-avatar size="26px">
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            </q-avatar>
+            <q-tooltip>Account</q-tooltip>
+            <q-menu>
+              <q-list>
+                <q-item clickable v-close-popup>
+                  <q-item-section > Perfil</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup>
+                  <q-item-section> Deslogar</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
+        </div>
+        <!-- Area da direita -->
       </q-toolbar>
     </q-header>
 
+    <!-- MENU LATERAL -->
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
+      side="left"
       bordered
+      class="bg-white"
+      :width="270"
     >
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
+        <q-item-label header></q-item-label>
         <EssentialLink
           v-for="link in linksList"
           :key="link.title"
@@ -38,9 +80,25 @@
         />
       </q-list>
     </q-drawer>
+    <!-- fim MENU LATERAL -->
 
     <q-page-container>
-      <router-view />
+      <div class="q-pa-xl main-container">
+        <!-- btn teste -->
+        <div class="q-pa-md q-gutter-sm">
+          <q-btn color="white" text-color="black" label="Home" to="/" />
+        </div>
+        <div class="q-pa-md q-gutter-sm">
+          <q-btn
+            color="white"
+            text-color="black"
+            label="detalhes/3"
+            to="detalhes/3"
+          />
+        </div>
+        <!-- btn teste -->
+        <router-view />
+      </div>
     </q-page-container>
   </q-layout>
 </template>

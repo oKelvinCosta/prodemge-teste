@@ -1,1 +1,22 @@
 // app global css in SCSS form
+
+.logo_prodemge {
+  max-width: 180px;
+}
+
+.q-drawer {
+  .q-item__section--side > .q-icon {
+    font-size: 20px;
+  }
+  .q-item {
+    color: $secondary;
+    font-weight: bold;
+  }
+}
+.q-item__section--avatar {
+  min-width: 0px;
+}
+.q-item__section--side {
+  padding-right: 20px;
+  padding-left: 4px;
+}
