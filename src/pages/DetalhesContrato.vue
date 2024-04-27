@@ -7,7 +7,7 @@
     </q-breadcrumbs>
   </div>
   <!-- Breadcumb -->
-  <div>Detalhes Contrato</div>
+  <h1>Detalhes Contrato</h1>
 
   <!-- Row Email -->
   <div class="row q-col-gutter-lg">
@@ -17,8 +17,20 @@
           <apexchart
             type="line"
             height="350"
-            :options="chartEmail.chartOptions"
-            :series="chartEmail.series"
+            :options="chartEmailL.chartOptions"
+            :series="chartEmailL.series"
+          ></apexchart>
+        </q-card-section>
+      </q-card>
+    </div>
+    <div class="col-12 col-md-6">
+      <q-card flat bordered>
+        <q-card-section class="q-pt-lg">
+          <apexchart
+            type="pie"
+            width="350"
+            :options="chartEmailP.chartOptions"
+            :series="chartEmailP.series"
           ></apexchart>
         </q-card-section>
       </q-card>
@@ -34,8 +46,20 @@
           <apexchart
             type="line"
             height="350"
-            :options="chartEspacoExtra.chartOptions"
-            :series="chartEspacoExtra.series"
+            :options="chartEspacoExtraL.chartOptions"
+            :series="chartEspacoExtraL.series"
+          ></apexchart>
+        </q-card-section>
+      </q-card>
+    </div>
+    <div class="col-12 col-md-6">
+      <q-card flat bordered>
+        <q-card-section class="q-pt-lg">
+          <apexchart
+            type="pie"
+            width="350"
+            :options="chartEspacoExtraP.chartOptions"
+            :series="chartEspacoExtraP.series"
           ></apexchart>
         </q-card-section>
       </q-card>
@@ -51,15 +75,26 @@
           <apexchart
             type="line"
             height="350"
-            :options="chartVideoconferencia.chartOptions"
-            :series="chartVideoconferencia.series"
+            :options="chartVideoconferenciaL.chartOptions"
+            :series="chartVideoconferenciaL.series"
+          ></apexchart>
+        </q-card-section>
+      </q-card>
+    </div>
+    <div class="col-12 col-md-6">
+      <q-card flat bordered>
+        <q-card-section class="q-pt-lg">
+          <apexchart
+            type="pie"
+            width="350"
+            :options="chartVideoconferenciaP.chartOptions"
+            :series="chartVideoconferenciaP.series"
           ></apexchart>
         </q-card-section>
       </q-card>
     </div>
   </div>
   <!-- Row Videoconferencia -->
-
 </template>
 
 <script>
@@ -69,7 +104,9 @@ export default {
     return {
       // Recebe Detalhes do Contrato
       contratoDetalhes: [],
-      chartEmail: {
+
+      // Gráficos de linha
+      chartEmailL: {
         series: [
           {
             name: "Uso de Email",
@@ -105,7 +142,7 @@ export default {
           },
         },
       },
-      chartEspacoExtra: {
+      chartEspacoExtraL: {
         series: [
           {
             name: "Uso de Espaço Extra",
@@ -141,7 +178,7 @@ export default {
           },
         },
       },
-      chartVideoconferencia: {
+      chartVideoconferenciaL: {
         series: [
           {
             name: "Uso de Videoconferencia",
@@ -175,6 +212,85 @@ export default {
           xaxis: {
             categories: [`x`],
           },
+        },
+      },
+      // Graficos de pizza
+      chartEmailP: {
+        series: [50 / 100, 100],
+        chartOptions: {
+          title: {
+            text: `Uso de Email`,
+          },
+          chart: {
+            width: 380,
+            type: "pie",
+          },
+          labels: ["Usado", "Cota"],
+          responsive: [
+            {
+              breakpoint: 500,
+              options: {
+                chart: {
+                  width: 200,
+                },
+                legend: {
+                  position: "bottom",
+                },
+              },
+            },
+          ],
+        },
+      },
+      chartEspacoExtraP: {
+        series: [50, 100],
+        chartOptions: {
+          title: {
+            text: `Uso de Espaço Extra`,
+          },
+          chart: {
+            width: 380,
+            type: "pie",
+          },
+          labels: ["Usado", "Cota"],
+          responsive: [
+            {
+              breakpoint: 500,
+              options: {
+                chart: {
+                  width: 200,
+                },
+                legend: {
+                  position: "bottom",
+                },
+              },
+            },
+          ],
+        },
+      },
+      chartVideoconferenciaP: {
+        series: [10, 100],
+        chartOptions: {
+          title:{
+          text: `Uso de Videoconferencia`
+        },
+          chart: {
+            width: 380,
+            type: "pie",
+          },
+          labels: ["Usado", "Cota"],
+          responsive: [
+            {
+              breakpoint: 500,
+              options: {
+                chart: {
+                  width: 200,
+                },
+                legend: {
+                  position: "bottom",
+                },
+              },
+            },
+          ],
         },
       },
 
@@ -590,27 +706,39 @@ export default {
           );
           let relatorios = this.contratoDetalhes.relatorios;
 
+          this.chartEmailP.series[0] =
+            relatorios[relatorios.length - 1].itens[0].uso;
+          this.chartEmailP.series[1] = this.contratoDetalhes.itens[0].cota;
+
+          this.chartEmailP.series[0] =
+            relatorios[relatorios.length - 1].itens[0].uso;
+          this.chartEmailP.series[1] = this.contratoDetalhes.itens[0].cota;
+
           for (let i = 0; i < relatorios.length; i++) {
             // Meses em que houve uso
-            this.chartEmail.chartOptions.xaxis.categories[i] =
+            this.chartEmailL.chartOptions.xaxis.categories[i] =
               relatorios[i].data;
 
-            this.chartEspacoExtra.chartOptions.xaxis.categories[i] =
+            this.chartEspacoExtraL.chartOptions.xaxis.categories[i] =
               relatorios[i].data;
-            this.chartVideoconferencia.chartOptions.xaxis.categories[i] =
+
+            this.chartVideoconferenciaL.chartOptions.xaxis.categories[i] =
               relatorios[i].data;
 
             // Valor usado em cada mês
-            this.chartEmail.series[0].data[i] = relatorios[i].itens.find(
+            this.chartEmailL.series[0].data[i] = relatorios[i].itens.find(
               ({ descricao }) => descricao == `email`
             ).uso;
 
-            this.chartEspacoExtra.series[0].data[i] = relatorios[i].itens.find(
+            this.chartEspacoExtraL.series[0].data[i] = relatorios[i].itens.find(
               ({ descricao }) => descricao == `espaco_extra`
             ).uso;
-            this.chartVideoconferencia.series[0].data[i] = relatorios[
+
+            this.chartVideoconferenciaL.series[0].data[i] = relatorios[
               i
-            ].itens.find(({ descricao }) => descricao == `videoconferencia`).uso;
+            ].itens.find(
+              ({ descricao }) => descricao == `videoconferencia`
+            ).uso;
           }
 
           // Teste conteúdo mockado
