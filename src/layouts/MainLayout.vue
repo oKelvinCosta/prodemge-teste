@@ -83,7 +83,7 @@
     <!-- fim MENU LATERAL -->
 
     <q-page-container>
-      <div class="q-pa-xl main-container">
+      <div class="q-pt-md q-pl-xl q-pr-xl  main-container">
         <router-view />
       </div>
     </q-page-container>

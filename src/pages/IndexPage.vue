@@ -1,5 +1,10 @@
 <template>
-  <q-page>
+  <q-page class="index">
+    <div class="row">
+      <h4>
+        Página Inicial
+      </h4>
+    </div>
     <q-table
       flat
       bordered
@@ -9,6 +14,8 @@
       row-key="codCliente"
       :filter="filter"
     >
+
+    <!-- Input Pesquisar -->
       <template v-slot:top-right>
         <q-input
           borderless
@@ -23,13 +30,34 @@
           </template>
         </q-input>
       </template>
+      <!-- Input Pesquisar -->
+
+      <!-- Código -->
+      <template v-slot:body-cell-codCliente="props">
+        <q-td :props="props">
+          <div>
+            <q-badge :label="props.row.codCliente" />
+          </div>
+        </q-td>
+      </template>
+      <!-- Código -->
+
+      <!-- Código -->
+      <template v-slot:body-cell-cliente="props">
+        <q-td :props="props">
+          <div class="my-table-details">
+            <b>{{ props.row.cliente }}</b>
+          </div>
+        </q-td>
+      </template>
+      <!-- Código -->
 
       <!-- Btn detalhes -->
       <!-- Tem acesso as propriedades da linha, por isso usa uma variavel qualquer -->
       <template v-slot:body-cell-action="props">
         <q-td :props="props">
           <RouterLink :to="detalhePage + props.row.id">
-            <q-btn color="primary" icon="poll" label="detalhes" />
+            <q-btn outline dense color="primary" icon="poll" label="detalhes" class="q-pl-sm q-pr-sm" />
           </RouterLink>
         </q-td>
       </template>
@@ -64,14 +92,14 @@ const columns = [
   {
     name: "dataAssinatura",
     label: "Início",
-    align: "left",
+    align: "center",
     field: "dataAssinatura",
     sortable: true,
   },
   {
     name: "dataFim",
     label: "Fim",
-    align: "left",
+    align: "center",
     field: "dataFim",
     sortable: true,
   },

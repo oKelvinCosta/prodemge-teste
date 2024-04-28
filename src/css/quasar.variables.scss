@@ -16,16 +16,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap");
 
 $sofia : "Sofia Sans Extra Condensed", sans-serif;
-h1{
+h1, h4{
   font-family: $sofia;
   text-transform: uppercase;
+  font-weight: bold;
+  margin: 20px 0;
+}
+h6{
+  font-weight: bold;
+  margin: 0;
 }
 $h1: (
   size: 3rem,
   line-height: 3rem,
   letter-spacing: -0.01562em,
   weight: 500,
-  font-family: "ui-monospace"
 ) !default;
 $h2: (
   size: 3.75rem,

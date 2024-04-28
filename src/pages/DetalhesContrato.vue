@@ -1,103 +1,161 @@
 <template>
-  <!-- Breadcumb -->
-  <div class="q-pa-md q-gutter-sm">
-    <q-breadcrumbs>
-      <q-breadcrumbs-el icon="home" to="/" label="Início" />
-      <q-breadcrumbs-el label="Detalhes" />
-    </q-breadcrumbs>
-  </div>
-  <!-- Breadcumb -->
-  <h1>Detalhes Contrato</h1>
+  <div class="detalhesPage">
+    <!-- Breadcumb -->
+    <div class="q-py-lg">
+      <q-breadcrumbs>
+        <q-breadcrumbs-el icon="home" to="/" label="Início" />
+        <q-breadcrumbs-el label="Detalhes" />
+      </q-breadcrumbs>
+    </div>
+    <!-- Breadcumb -->
+    <h4>Detalhes Contrato</h4>
 
-  <!-- Row Email -->
-  <div class="row q-col-gutter-lg">
-    <div class="col-12 col-md-6">
-      <q-card flat bordered>
-        <q-card-section class="q-pt-lg">
-          <apexchart
-            type="line"
-            height="350"
-            :options="chartEmailL.chartOptions"
-            :series="chartEmailL.series"
-          ></apexchart>
-        </q-card-section>
-      </q-card>
+    <!-- Info Cliente -->
+    <div class="row q-mb-lg q-gutter-md" id="cliente">
+      <div>
+        <q-card flat bordered>
+          <q-card-section class="info_cliente q-pa-lg">
+            <div>
+              <div class="q-badge q-pa-xs q-mr-md q-mt-sm">
+                {{ contratoDetalhes.codCliente }}
+              </div>
+            </div>
+            <div>
+              <div class="cliente">
+                <h6>{{ contratoDetalhes.cliente }}</h6>
+              </div>
+              <div class="descricao">{{ contratoDetalhes.descricao }}</div>
+            </div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div>
+        <q-card flat bordered>
+          <q-card-section class="q-pa-lg">
+            <div>
+              <b class="q-pr-sm">Início:</b
+              >{{ contratoDetalhes.dataAssinatura }}
+            </div>
+            <div><b class="q-pr-sm">Fim:</b>{{ contratoDetalhes.dataFim }}</div>
+          </q-card-section>
+        </q-card>
+      </div>
     </div>
-    <div class="col-12 col-md-6">
-      <q-card flat bordered>
-        <q-card-section class="q-pt-lg">
-          <apexchart
-            type="pie"
-            width="350"
-            :options="chartEmailP.chartOptions"
-            :series="chartEmailP.series"
-          ></apexchart>
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>
-  <!-- Row Email -->
+    <!-- Info Cliente -->
 
-  <!-- Row EspacoExtra -->
-  <div class="row q-col-gutter-lg">
-    <div class="col-12 col-md-6">
-      <q-card flat bordered>
-        <q-card-section class="q-pt-lg">
-          <apexchart
-            type="line"
-            height="350"
-            :options="chartEspacoExtraL.chartOptions"
-            :series="chartEspacoExtraL.series"
-          ></apexchart>
-        </q-card-section>
-      </q-card>
+    <!-- Row Email -->
+    <div>
+      <div class="row q-mb-sm">
+        <h6>E-mail</h6>
+      </div>
+      <div class="row q-mb-lg q-col-gutter-lg">
+        <div class="col-12 col-sm-6 col-md-7 col-lg-8">
+          <q-card flat bordered>
+            <q-card-section class="q-pt-lg">
+              <apexchart
+                type="line"
+                height="350"
+                :options="chartEmailL.chartOptions"
+                :series="chartEmailL.series"
+              ></apexchart>
+            </q-card-section>
+          </q-card>
+        </div>
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+          <q-card flat bordered>
+            <q-card-section class="q-pt-lg">
+              <apexchart
+                type="pie"
+                width="350"
+                :options="chartEmailP.chartOptions"
+                :series="chartEmailP.series"
+              ></apexchart>
+            </q-card-section>
+          </q-card>
+        </div>
+      </div>
     </div>
-    <div class="col-12 col-md-6">
-      <q-card flat bordered>
-        <q-card-section class="q-pt-lg">
-          <apexchart
-            type="pie"
-            width="350"
-            :options="chartEspacoExtraP.chartOptions"
-            :series="chartEspacoExtraP.series"
-          ></apexchart>
-        </q-card-section>
-      </q-card>
-    </div>
-  </div>
-  <!-- Row EspacoExtra -->
+    <!-- Row Email -->
 
-  <!-- Row Videoconferencia -->
-  <div class="row q-col-gutter-lg">
-    <div class="col-12 col-md-6">
-      <q-card flat bordered>
-        <q-card-section class="q-pt-lg">
-          <apexchart
-            type="line"
-            height="350"
-            :options="chartVideoconferenciaL.chartOptions"
-            :series="chartVideoconferenciaL.series"
-          ></apexchart>
-        </q-card-section>
-      </q-card>
+    <!-- Row EspacoExtra -->
+    <div>
+      <div class="row q-mb-sm">
+        <h6>Espaço Extra</h6>
+      </div>
+
+      <div class="row q-mb-lg q-col-gutter-lg">
+        <div class="col-12 col-sm-6 col-md-7 col-lg-8">
+          <q-card flat bordered>
+            <q-card-section class="q-pt-lg">
+              <apexchart
+                type="line"
+                height="350"
+                :options="chartEspacoExtraL.chartOptions"
+                :series="chartEspacoExtraL.series"
+              ></apexchart>
+            </q-card-section>
+          </q-card>
+        </div>
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+          <q-card flat bordered>
+            <q-card-section class="q-pt-lg">
+              <apexchart
+                type="pie"
+                width="350"
+                :options="chartEspacoExtraP.chartOptions"
+                :series="chartEspacoExtraP.series"
+              ></apexchart>
+            </q-card-section>
+          </q-card>
+        </div>
+      </div>
     </div>
-    <div class="col-12 col-md-6">
-      <q-card flat bordered>
-        <q-card-section class="q-pt-lg">
-          <apexchart
-            type="pie"
-            width="350"
-            :options="chartVideoconferenciaP.chartOptions"
-            :series="chartVideoconferenciaP.series"
-          ></apexchart>
-        </q-card-section>
-      </q-card>
+    <!-- Row EspacoExtra -->
+
+    <!-- Row Videoconferencia -->
+    <div>
+      <div class="row q-mb-sm">
+        <h6>Videoconferência</h6>
+      </div>
+
+      <div class="row q-mb-lg q-col-gutter-lg">
+        <div class="col-12 col-sm-6 col-md-7 col-lg-8">
+          <q-card flat bordered>
+            <q-card-section class="q-pt-lg">
+              <apexchart
+                type="line"
+                height="350"
+                :options="chartVideoconferenciaL.chartOptions"
+                :series="chartVideoconferenciaL.series"
+              ></apexchart>
+            </q-card-section>
+          </q-card>
+        </div>
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+          <q-card flat bordered>
+            <q-card-section class="q-pt-lg">
+              <apexchart
+                type="pie"
+                width="350"
+                :options="chartVideoconferenciaP.chartOptions"
+                :series="chartVideoconferenciaP.series"
+              ></apexchart>
+            </q-card-section>
+          </q-card>
+        </div>
+      </div>
     </div>
+    <!-- Row Videoconferencia -->
   </div>
-  <!-- Row Videoconferencia -->
 </template>
 
 <script>
+const colors = {
+  red: "#cf7680",
+  gray: "#959595",
+  darkGray: "#4c4c4c",
+};
+
 export default {
   name: "DetalhesContrato",
   data() {
@@ -109,12 +167,15 @@ export default {
       chartEmailL: {
         series: [
           {
-            name: "Uso de Email",
+            name: "Uso de E-mail",
             data: [1],
           },
         ],
         chartOptions: {
+          colors: [colors.red],
           chart: {
+            foreColor: colors.darkGray,
+            fontFamily: "Roboto, Arial, sans-serif",
             height: 350,
             type: "line",
             zoom: {
@@ -128,7 +189,7 @@ export default {
             curve: "straight",
           },
           title: {
-            text: "Product Trends by Month",
+            text: "Cotas de E-mail usadas",
             align: "left",
           },
           grid: {
@@ -150,7 +211,10 @@ export default {
           },
         ],
         chartOptions: {
+          colors: [colors.red],
           chart: {
+            foreColor: colors.darkGray,
+            fontFamily: "Roboto, Arial, sans-serif",
             height: 350,
             type: "line",
             zoom: {
@@ -164,7 +228,7 @@ export default {
             curve: "straight",
           },
           title: {
-            text: "Product Trends by Month",
+            text: "Cotas de Espaço Extra usadas",
             align: "left",
           },
           grid: {
@@ -186,7 +250,10 @@ export default {
           },
         ],
         chartOptions: {
+          colors: [colors.red],
           chart: {
+            foreColor: colors.darkGray,
+            fontFamily: "Roboto, Arial, sans-serif",
             height: 350,
             type: "line",
             zoom: {
@@ -200,7 +267,7 @@ export default {
             curve: "straight",
           },
           title: {
-            text: "Product Trends by Month",
+            text: "Cotas de Videoconferencia usadas",
             align: "left",
           },
           grid: {
@@ -221,20 +288,34 @@ export default {
           title: {
             text: `Uso de Email`,
           },
+          colors: [colors.red, colors.gray],
           chart: {
+            foreColor: colors.darkGray,
+            fontFamily: "Roboto, Arial, sans-serif",
             width: 380,
             type: "pie",
           },
           labels: ["Usado", "Cota"],
           responsive: [
             {
-              breakpoint: 500,
+              breakpoint: 850,
               options: {
                 chart: {
-                  width: 200,
+                  width: 300,
                 },
                 legend: {
                   position: "bottom",
+                },
+              },
+            },
+            {
+              breakpoint: 576,
+              options: {
+                chart: {
+                  width: 300,
+                },
+                legend: {
+                  position: "right",
                 },
               },
             },
@@ -247,7 +328,10 @@ export default {
           title: {
             text: `Uso de Espaço Extra`,
           },
+          colors: [colors.red, colors.gray],
           chart: {
+            foreColor: colors.darkGray,
+            fontFamily: "Roboto, Arial, sans-serif",
             width: 380,
             type: "pie",
           },
@@ -270,10 +354,13 @@ export default {
       chartVideoconferenciaP: {
         series: [10, 100],
         chartOptions: {
-          title:{
-          text: `Uso de Videoconferencia`
-        },
+          title: {
+            text: `Uso de Videoconferencia`,
+          },
+          colors: [colors.red, colors.gray],
           chart: {
+            foreColor: colors.darkGray,
+            fontFamily: "Roboto, Arial, sans-serif",
             width: 380,
             type: "pie",
           },

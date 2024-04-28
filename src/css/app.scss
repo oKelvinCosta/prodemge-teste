@@ -1,7 +1,14 @@
 // app global css in SCSS form
-body{
-  background-color: rgb(196, 196, 196);
+
+// GERAL
+body {
+  background-color: #fafafa;
 }
+.main-container {
+  max-width: 1600px;
+  margin: auto;
+}
+
 .logo_prodemge {
   max-width: 180px;
 }
@@ -21,4 +28,73 @@ body{
 .q-item__section--side {
   padding-right: 20px;
   padding-left: 4px;
+}
+
+// TABELAS
+.q-table__title {
+  font-weight: 500;
+}
+
+.q-table {
+  th {
+    font-weight: bold;
+    font-size: 15px;
+    color: #858585;
+  }
+  td {
+    font-size: 14px !important;
+  }
+  .q-badge {
+    color: #222222;
+    font-weight: bold;
+    background-color: #f4f4f4;
+    border: 1px solid #484848;
+    border-radius: 3px;
+  }
+}
+
+.q-card--bordered {
+  border: 1px solid rgb(0 0 0 / 18%);
+}
+
+// Pagina detalhes
+.detalhesPage .q-card {
+  height: 100%;
+}
+
+.info_cliente {
+  display: flex;
+  .q-badge {
+    color: #222222;
+    font-weight: bold;
+    background-color: #f4f4f4;
+    border: 1px solid #484848;
+    border-radius: 3px;
+  }
+}
+
+#cliente > div:nth-child(2) > div > div > div:nth-child(2){
+  display: flex;
+    justify-content: space-between;
+}
+
+
+@media (max-width: $breakpoint-sm-max) {
+  html {
+    font-size: 80%;
+  }
+  .main-container {
+    padding: 20px;
+  }
+}
+
+@media (max-width: $breakpoint-xs-max) {
+  #cliente > div{
+    width: 100%;
+
+  }
+  #cliente > div:nth-child(2) > div > div {
+    display: flex;
+    justify-content: space-between;
+  }
 }
