@@ -49,7 +49,7 @@
         <h6>E-mail</h6>
       </div>
       <div class="row q-mb-lg q-col-gutter-lg">
-        <div class="col-12 col-sm-6 col-md-7 col-lg-8">
+        <div class="col-12 col-md-7 col-lg-8">
           <q-card flat bordered>
             <q-card-section class="q-pt-lg">
               <apexchart
@@ -61,12 +61,12 @@
             </q-card-section>
           </q-card>
         </div>
-        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+        <div class="col-12 col-md-5 col-lg-4">
           <q-card flat bordered>
             <q-card-section class="q-pt-lg">
               <apexchart
                 type="pie"
-                width="350"
+                width="380"
                 :options="chartEmailP.chartOptions"
                 :series="chartEmailP.series"
               ></apexchart>
@@ -84,7 +84,7 @@
       </div>
 
       <div class="row q-mb-lg q-col-gutter-lg">
-        <div class="col-12 col-sm-6 col-md-7 col-lg-8">
+        <div class="col-12 col-md-12 col-lg-8">
           <q-card flat bordered>
             <q-card-section class="q-pt-lg">
               <apexchart
@@ -96,7 +96,7 @@
             </q-card-section>
           </q-card>
         </div>
-        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+        <div class="col-12 col-md-12 col-lg-4">
           <q-card flat bordered>
             <q-card-section class="q-pt-lg">
               <apexchart
@@ -119,7 +119,7 @@
       </div>
 
       <div class="row q-mb-lg q-col-gutter-lg">
-        <div class="col-12 col-sm-6 col-md-7 col-lg-8">
+        <div class="col-12 col-md-12 col-lg-8">
           <q-card flat bordered>
             <q-card-section class="q-pt-lg">
               <apexchart
@@ -131,7 +131,7 @@
             </q-card-section>
           </q-card>
         </div>
-        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+        <div class="col-12 col-md-12 col-lg-4">
           <q-card flat bordered>
             <q-card-section class="q-pt-lg">
               <apexchart
@@ -146,15 +146,88 @@
       </div>
     </div>
     <!-- Row Videoconferencia -->
+
+    <!-- Row Relatórios -->
+
+    <!-- Row Relatórios -->
   </div>
 </template>
 
 <script>
 const colors = {
   red: "#cf7680",
-  gray: "#959595",
+  gray: "#5fc778",
   darkGray: "#4c4c4c",
 };
+
+const responsiveP = [
+  {
+    breakpoint: 1600,
+    options: {
+      chart: {
+        width: 350,
+      },
+      legend: {
+        position: "bottom",
+      },
+    },
+  },
+  {
+    breakpoint: 1440,
+    options: {
+      chart: {
+        width: 350,
+      },
+      legend: {
+        position: "bottom",
+      },
+    },
+  },
+  {
+    breakpoint: 1200,
+    options: {
+      chart: {
+        width: 300,
+      },
+      legend: {
+        position: "bottom",
+      },
+    },
+  },
+  {
+    breakpoint: 1024,
+    options: {
+      chart: {
+        width: 350,
+      },
+      legend: {
+        position: "right",
+      },
+    },
+  },
+  {
+    breakpoint: 850,
+    options: {
+      chart: {
+        width: 300,
+      },
+      legend: {
+        position: "right",
+      },
+    },
+  },
+  {
+    breakpoint: 576,
+    options: {
+      chart: {
+        width: 300,
+      },
+      legend: {
+        position: "right",
+      },
+    },
+  },
+];
 
 export default {
   name: "DetalhesContrato",
@@ -283,7 +356,7 @@ export default {
       },
       // Graficos de pizza
       chartEmailP: {
-        series: [50 / 100, 100],
+        series: [2300, 8000 - 2300],
         chartOptions: {
           title: {
             text: `Uso de Email`,
@@ -295,31 +368,8 @@ export default {
             width: 380,
             type: "pie",
           },
-          labels: ["Usado", "Cota"],
-          responsive: [
-            {
-              breakpoint: 850,
-              options: {
-                chart: {
-                  width: 300,
-                },
-                legend: {
-                  position: "bottom",
-                },
-              },
-            },
-            {
-              breakpoint: 576,
-              options: {
-                chart: {
-                  width: 300,
-                },
-                legend: {
-                  position: "right",
-                },
-              },
-            },
-          ],
+          labels: ["Usado", "Disponível"],
+          responsive: responsiveP,
         },
       },
       chartEspacoExtraP: {
@@ -335,20 +385,8 @@ export default {
             width: 380,
             type: "pie",
           },
-          labels: ["Usado", "Cota"],
-          responsive: [
-            {
-              breakpoint: 500,
-              options: {
-                chart: {
-                  width: 200,
-                },
-                legend: {
-                  position: "bottom",
-                },
-              },
-            },
-          ],
+          labels: ["Usado", "Disponível"],
+          responsive: responsiveP
         },
       },
       chartVideoconferenciaP: {
@@ -364,20 +402,8 @@ export default {
             width: 380,
             type: "pie",
           },
-          labels: ["Usado", "Cota"],
-          responsive: [
-            {
-              breakpoint: 500,
-              options: {
-                chart: {
-                  width: 200,
-                },
-                legend: {
-                  position: "bottom",
-                },
-              },
-            },
-          ],
+          labels: ["Usado", "Disponível"],
+          responsive: responsiveP
         },
       },
 
@@ -793,13 +819,28 @@ export default {
           );
           let relatorios = this.contratoDetalhes.relatorios;
 
+          //uso
           this.chartEmailP.series[0] =
             relatorios[relatorios.length - 1].itens[0].uso;
-          this.chartEmailP.series[1] = this.contratoDetalhes.itens[0].cota;
+          // disponivel
+          this.chartEmailP.series[1] =
+            this.contratoDetalhes.itens[0].cota - this.chartEmailP.series[0];
 
-          this.chartEmailP.series[0] =
-            relatorios[relatorios.length - 1].itens[0].uso;
-          this.chartEmailP.series[1] = this.contratoDetalhes.itens[0].cota;
+          //uso
+          this.chartEspacoExtraP.series[0] =
+            relatorios[relatorios.length - 1].itens[1].uso;
+          // disponivel
+          this.chartEspacoExtraP.series[1] =
+            this.contratoDetalhes.itens[1].cota -
+            this.chartEspacoExtraP.series[0];
+
+          //uso
+          this.chartVideoconferenciaP.series[0] =
+            relatorios[relatorios.length - 1].itens[2].uso;
+          // disponivel
+          this.chartVideoconferenciaP.series[1] =
+            this.contratoDetalhes.itens[2].cota -
+            this.chartVideoconferenciaP.series[0];
 
           for (let i = 0; i < relatorios.length; i++) {
             // Meses em que houve uso
