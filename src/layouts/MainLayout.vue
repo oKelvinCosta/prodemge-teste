@@ -16,7 +16,11 @@
 
         <!-- Logo Prodemge -->
         <q-toolbar-title class="row items-center no-wrap">
-          <img class="logo_prodemge" src="/img/logo_prodemge.png" alt="logo_prodemge" />
+          <img
+            class="logo_prodemge"
+            src="/img/logo_prodemge.png"
+            alt="logo_prodemge"
+          />
         </q-toolbar-title>
         <!-- Logo Prodemge -->
 
@@ -28,8 +32,7 @@
             <q-tooltip>Notifications</q-tooltip>
             <q-menu>
               <q-list>
-                <q-item clickable
-                v-close-popup>
+                <q-item clickable v-close-popup>
                   <q-item-section> Notificação #1</q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup>
@@ -38,8 +41,6 @@
               </q-list>
             </q-menu>
           </q-btn>
-
-
 
           <!-- Notificações -->
           <q-btn round flat>
@@ -50,7 +51,7 @@
             <q-menu>
               <q-list>
                 <q-item clickable v-close-popup>
-                  <q-item-section > Perfil</q-item-section>
+                  <q-item-section> Perfil</q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup>
                   <q-item-section> Deslogar</q-item-section>
@@ -83,7 +84,7 @@
     <!-- fim MENU LATERAL -->
 
     <q-page-container>
-      <div class="q-pt-md q-pl-xl q-pr-xl  main-container">
+      <div class="q-pt-md q-pl-xl q-pr-xl main-container">
         <router-view />
       </div>
     </q-page-container>
@@ -91,61 +92,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { ref } from "vue";
+import EssentialLink from "components/EssentialLink.vue";
 
 defineOptions({
-  name: 'MainLayout'
-})
+  name: "MainLayout",
+});
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: "Contratos",
+    caption: "",
+    icon: "description",
+    link: "",
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: "Documentação",
+    caption: "",
+    icon: "code",
+    link: "",
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: "Ajuda",
+    caption: "",
+    icon: "help",
+    link: "",
   },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
 
-const leftDrawerOpen = ref(false)
+];
 
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+const leftDrawerOpen = ref(true);
+
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 </script>
