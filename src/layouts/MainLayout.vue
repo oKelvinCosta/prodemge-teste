@@ -16,7 +16,7 @@
 
         <!-- Logo Prodemge -->
         <q-toolbar-title class="row items-center no-wrap">
-          <router-link to="/">
+          <router-link to="/" class="flex">
             <img
               class="logo_prodemge"
               src="/img/logo_prodemge.png"
