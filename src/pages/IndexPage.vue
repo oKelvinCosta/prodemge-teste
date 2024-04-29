@@ -3,6 +3,7 @@
     <div class="row">
       <h4>Página Inicial</h4>
     </div>
+
     <q-table
       flat
       bordered
@@ -11,7 +12,14 @@
       :columns="columns"
       row-key="codCliente"
       :filter="filter"
+      :loading="loading"
     >
+      <!-- Carregamento -->
+      <template v-slot:loading>
+        <q-inner-loading showing color="primary" />
+      </template>
+      <!-- Carregamento -->
+
       <!-- Input Pesquisar -->
       <template v-slot:top-right>
         <q-select
@@ -25,7 +33,7 @@
           input-debounce="0"
           :options="options"
           @filter="filterFn"
-          style="max-width: 300px; width: 100%;"
+          style="max-width: 300px; width: 100%"
           clearable
           @clear="clearFilter"
         />
@@ -77,6 +85,8 @@
 <script>
 var stringOptions = [];
 var options = ref(stringOptions);
+const visible = ref(false);
+const showSimulatedReturnData = ref(false);
 </script>
 
 <script setup>
@@ -127,7 +137,10 @@ defineOptions({
   name: "IndexPage",
   data() {
     return {
+      visible,
+      showSimulatedReturnData,
       filter: ref(""),
+      loading: ref(false),
       rows: [],
       detalhePage: `/detalhes/`,
       options,
@@ -526,8 +539,12 @@ defineOptions({
     };
   },
   mounted() {
-    this.getContrato();
-    this.getClientes();
+    this.loading = ref(true);
+    setTimeout(() => {
+      this.loading = ref(false);
+      this.getContrato();
+      this.getClientes();
+    }, 1500);
   },
   methods: {
     clearFilter() {

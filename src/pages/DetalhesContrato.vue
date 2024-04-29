@@ -159,17 +159,47 @@
           :columns="columns"
           row-key="data"
           :filter="filter"
+          :loading="loading"
         >
+          <!-- Carregamento -->
+          <template v-slot:loading>
+            <q-inner-loading showing color="primary" />
+          </template>
+          <!-- Carregamento -->
+
           <template v-slot:body="props">
             <q-tr :props="props">
               <q-td key="data" :props="props">
-
-                  {{ props.row.data }}
-
+                {{ props.row.data }}
               </q-td>
-              <q-td v-for="item in props.row.itens" :key="item.descricao" :props="props">
-                <span v-if="contratoDetalhes.itens.find(({ descricao }) => descricao == item.descricao).cota - item.uso >1" ><b style="color: green;">{{ item.uso }}</b>/{{ contratoDetalhes.itens.find(({ descricao }) => descricao == item.descricao).cota }}</span>
-                <span v-else><b style="color: red;">{{ item.uso }}</b>/{{ contratoDetalhes.itens.find(({ descricao }) => descricao == item.descricao).cota }}</span>
+              <q-td
+                v-for="item in props.row.itens"
+                :key="item.descricao"
+                :props="props"
+              >
+                <span
+                  v-if="
+                    contratoDetalhes.itens.find(
+                      ({ descricao }) => descricao == item.descricao
+                    ).cota -
+                      item.uso >
+                    1
+                  "
+                  ><b style="color: green">{{ item.uso }}</b
+                  >/{{
+                    contratoDetalhes.itens.find(
+                      ({ descricao }) => descricao == item.descricao
+                    ).cota
+                  }}</span
+                >
+                <span v-else
+                  ><b style="color: red">{{ item.uso }}</b
+                  >/{{
+                    contratoDetalhes.itens.find(
+                      ({ descricao }) => descricao == item.descricao
+                    ).cota
+                  }}</span
+                >
               </q-td>
             </q-tr>
           </template>
@@ -195,8 +225,6 @@ function comparaData(d) {
   let da = new Date(formatada).getTime();
   return da;
 }
-
-
 
 const colors = {
   red: "#cf7680",
@@ -367,6 +395,7 @@ defineOptions({
   data() {
     return {
       filter: ref(""),
+      loading: ref(false),
       // Recebe Detalhes do Contrato
       contratoDetalhes: [],
       relatorios: [],
@@ -947,11 +976,19 @@ defineOptions({
           // Resposta viria por aqui se a API fosse verdadeira
         })
         .catch((err) => {
+
+          this.loading = ref(true);
+          setTimeout(() => {
+            this.loading = ref(false);
+
+          }, 1500);
+
           // Como não é possível acessar a API, carregarei com dados falsos
           // Procura no objeto os dados no qual o ID do contrato equivale ao ID parametro da função
           this.contratoDetalhes = this.apiContratos.contratos.find(
             ({ id }) => id == idDaUrl
           );
+
 
           let relatorios = this.contratoDetalhes.relatorios;
 
