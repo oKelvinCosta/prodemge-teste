@@ -44,7 +44,7 @@
           <!-- Notificações -->
           <q-btn round flat>
             <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              <img src="/img/perfil.png" />
             </q-avatar>
             <q-tooltip>Account</q-tooltip>
             <q-menu>

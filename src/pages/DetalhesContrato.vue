@@ -148,12 +148,54 @@
     <!-- Row Videoconferencia -->
 
     <!-- Row Relatórios -->
+    <div>
+      <div class="row q-my-xl">
+        <q-table
+          class="col"
+          flat
+          bordered
+          title="Relatórios"
+          :rows="relatorios"
+          :columns="columns"
+          row-key="data"
+          :filter="filter"
+        >
+          <template v-slot:body="props">
+            <q-tr :props="props">
+              <q-td key="data" :props="props">
 
+                  {{ props.row.data }}
+
+              </q-td>
+              <q-td v-for="item in props.row.itens" :key="item.descricao" :props="props">
+                {{ item.uso }}
+              </q-td>
+            </q-tr>
+          </template>
+        </q-table>
+      </div>
+    </div>
     <!-- Row Relatórios -->
   </div>
 </template>
 
 <script>
+console.log(`data`);
+// let dataBR = '01/2023';
+// dataBR.split('/');
+// let formatada = dataBR.split('/')[1]+'-'+dataBR.split('/')[0];
+// let da = new Date(formatada).getTime();
+
+function comparaData(d) {
+  let dataBR = d;
+  dataBR.split("/");
+  // fica um array assim: [02, 2024]
+  let formatada = dataBR.split("/")[1] + "-" + dataBR.split("/")[0];
+  // Insiro da forma EUA: 2024-02
+  let da = new Date(formatada).getTime();
+  return da;
+}
+
 const colors = {
   red: "#cf7680",
   gray: "#5fc778",
@@ -228,13 +270,93 @@ const responsiveP = [
     },
   },
 ];
+</script>
 
-export default {
+<script setup>
+import { ref } from "vue";
+
+const rows = [
+  {
+    data: "08/2024",
+    itens: [
+      {
+        descricao: `email`,
+        uso: 1000,
+      },
+      {
+        descricao: `video`,
+        uso: 500,
+      },
+    ],
+  },
+  {
+    data: "12/2026",
+    itens: [
+      {
+        descricao: `email`,
+        uso: 1000,
+      },
+      {
+        descricao: `video`,
+        uso: 500,
+      },
+    ],
+  },
+  {
+    data: "01/2025",
+    itens: [
+      {
+        descricao: `email`,
+        uso: 1000,
+      },
+      {
+        descricao: `video`,
+        uso: 500,
+      },
+    ],
+  },
+];
+
+const columns = [
+  {
+    name: "data",
+    label: "Data",
+    align: "center",
+    field: "data",
+    sortable: true,
+    sort: (a, b) => comparaData(a) - comparaData(b),
+  },
+  {
+    name: "email",
+    label: "Uso E-mail",
+    align: "center",
+    field: "email",
+    sortable: true,
+  },
+  {
+    name: "espaco_extra",
+    label: "Uso Espaço Extra",
+    align: "center",
+    field: "espaco_extra",
+    sortable: true,
+  },
+  {
+    name: "videoconferencia",
+    label: "Uso de Videoconferência",
+    align: "center",
+    field: "videoconferencia",
+    sortable: true,
+  },
+];
+
+defineOptions({
   name: "DetalhesContrato",
   data() {
     return {
+      filter: ref(""),
       // Recebe Detalhes do Contrato
       contratoDetalhes: [],
+      relatorios: [],
 
       // Gráficos de linha
       chartEmailL: {
@@ -386,7 +508,7 @@ export default {
             type: "pie",
           },
           labels: ["Usado", "Disponível"],
-          responsive: responsiveP
+          responsive: responsiveP,
         },
       },
       chartVideoconferenciaP: {
@@ -403,7 +525,7 @@ export default {
             type: "pie",
           },
           labels: ["Usado", "Disponível"],
-          responsive: responsiveP
+          responsive: responsiveP,
         },
       },
 
@@ -817,7 +939,10 @@ export default {
           this.contratoDetalhes = this.apiContratos.contratos.find(
             ({ id }) => id == idDaUrl
           );
+
           let relatorios = this.contratoDetalhes.relatorios;
+
+          this.relatorios = relatorios;
 
           //uso
           this.chartEmailP.series[0] =
@@ -874,5 +999,5 @@ export default {
         });
     },
   },
-};
+});
 </script>
