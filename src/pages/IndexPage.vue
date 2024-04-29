@@ -1,9 +1,7 @@
 <template>
   <q-page class="index">
     <div class="row">
-      <h4>
-        Página Inicial
-      </h4>
+      <h4>Página Inicial</h4>
     </div>
     <q-table
       flat
@@ -14,22 +12,25 @@
       row-key="codCliente"
       :filter="filter"
     >
-
-    <!-- Input Pesquisar -->
+      <!-- Input Pesquisar -->
       <template v-slot:top-right>
-        <q-input
-          borderless
-          dense
+        <q-select
           outlined
-          debounce="300"
+          dense
+          label="Filtrar por Cliente"
           v-model="filter"
-          placeholder="Pesquisar"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="0"
+          :options="options"
+          @filter="filterFn"
+          style="width: 300px"
+          clearable
+          @clear="clearFilter"
+        />
       </template>
+
       <!-- Input Pesquisar -->
 
       <!-- Código -->
@@ -42,7 +43,7 @@
       </template>
       <!-- Código -->
 
-      <!-- Código -->
+      <!-- Cliente -->
       <template v-slot:body-cell-cliente="props">
         <q-td :props="props">
           <div class="my-table-details">
@@ -50,14 +51,21 @@
           </div>
         </q-td>
       </template>
-      <!-- Código -->
+      <!-- Cliente -->
 
       <!-- Btn detalhes -->
       <!-- Tem acesso as propriedades da linha, por isso usa uma variavel qualquer -->
       <template v-slot:body-cell-action="props">
         <q-td :props="props">
           <RouterLink :to="detalhePage + props.row.id">
-            <q-btn outline dense color="primary" icon="poll" label="detalhes" class="q-pl-sm q-pr-sm" />
+            <q-btn
+              outline
+              dense
+              color="primary"
+              icon="poll"
+              label="detalhes"
+              class="q-pl-sm q-pr-sm"
+            />
           </RouterLink>
         </q-td>
       </template>
@@ -65,6 +73,11 @@
     </q-table>
   </q-page>
 </template>
+
+<script>
+var stringOptions = [];
+var options = ref(stringOptions);
+</script>
 
 <script setup>
 import { ref } from "vue";
@@ -117,6 +130,29 @@ defineOptions({
       filter: ref(""),
       rows: [],
       detalhePage: `/detalhes/`,
+      options,
+      filterFn(val, update, abort) {
+        update(() => {
+          const needle = val.toLowerCase();
+          options.value = stringOptions.filter(
+            (v) => v.toLowerCase().indexOf(needle) > -1
+          );
+        });
+      },
+      apiClientes: {
+        clientes: [
+          {
+            id: 1,
+            nome: "Prefeitura de Belo Horizonte",
+            codCliente: "PBH01",
+          },
+          {
+            id: 2,
+            nome: "Corpo de Bombeiros de Minas Gerais",
+            codCliente: "BOM01",
+          },
+        ],
+      },
       apiContratos: {
         contratos: [
           {
@@ -491,10 +527,27 @@ defineOptions({
   },
   mounted() {
     this.getContrato();
+    this.getClientes();
   },
   methods: {
+    clearFilter() {
+      this.filter = ""; // Limpa o valor do filtro
+    },
+    getClientes() {
+      this.$axios
+        .get("api.prodemge.gov.br/clientes")
+        .then((res) => {
+          // Resposta viria por aqui se a API fosse verdadeira
+        })
+        .catch((err) => {
+          // Como não é possível acessar a API, carregarei com dados falsos
+          // Organizo em um array simples
+          this.apiClientes.clientes.map(function (param, i) {
+            stringOptions[i] = param.nome;
+          });
+        });
+    },
     getContrato() {
-      console.log(`get`);
       this.$axios
         .get("api.prodemge.gov.br/contratos")
         .then((res) => {
@@ -503,7 +556,6 @@ defineOptions({
         .catch((err) => {
           // Como não é possível acessar a API, carregarei com dados falsos
           this.rows = this.apiContratos.contratos;
-          // console.log(this.recebeApiContratos[0].id);
         });
     },
   },
