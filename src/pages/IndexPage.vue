@@ -25,7 +25,7 @@
           input-debounce="0"
           :options="options"
           @filter="filterFn"
-          style="width: 300px"
+          style="max-width: 300px; width: 100%;"
           clearable
           @clear="clearFilter"
         />

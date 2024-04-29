@@ -100,4 +100,20 @@ body {
     display: flex;
     justify-content: space-between;
   }
+  .index .q-table__control {
+    width: 100%;
+  }
+}
+
+@media (max-width: "360px") {
+  .main-container {
+    padding: 10px;
+  }
+  .logo_prodemge {
+    max-width: 120px;
+  }
+  #cliente > div:nth-child(2) div {
+    display: block !important;
+  }
+
 }

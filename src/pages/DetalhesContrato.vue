@@ -271,6 +271,17 @@ const responsiveP = [
       },
     },
   },
+  {
+    breakpoint: 360,
+    options: {
+      chart: {
+        width: 260,
+      },
+      legend: {
+        position: "right",
+      },
+    },
+  },
 ];
 </script>
 
