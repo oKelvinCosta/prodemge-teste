@@ -168,7 +168,8 @@
 
               </q-td>
               <q-td v-for="item in props.row.itens" :key="item.descricao" :props="props">
-                {{ item.uso }}
+                <span v-if="contratoDetalhes.itens.find(({ descricao }) => descricao == item.descricao).cota - item.uso >1" ><b style="color: green;">{{ item.uso }}</b>/{{ contratoDetalhes.itens.find(({ descricao }) => descricao == item.descricao).cota }}</span>
+                <span v-else><b style="color: red;">{{ item.uso }}</b>/{{ contratoDetalhes.itens.find(({ descricao }) => descricao == item.descricao).cota }}</span>
               </q-td>
             </q-tr>
           </template>
@@ -195,6 +196,8 @@ function comparaData(d) {
   let da = new Date(formatada).getTime();
   return da;
 }
+
+
 
 const colors = {
   red: "#cf7680",
