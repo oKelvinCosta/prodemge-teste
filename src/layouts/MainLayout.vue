@@ -16,11 +16,13 @@
 
         <!-- Logo Prodemge -->
         <q-toolbar-title class="row items-center no-wrap">
-          <img
-            class="logo_prodemge"
-            src="/img/logo_prodemge.png"
-            alt="logo_prodemge"
-          />
+          <router-link to="/">
+            <img
+              class="logo_prodemge"
+              src="/img/logo_prodemge.png"
+              alt="logo_prodemge"
+            />
+          </router-link>
         </q-toolbar-title>
         <!-- Logo Prodemge -->
 
@@ -29,7 +31,6 @@
           <!-- Notificações -->
           <q-btn round dense flat color="secondary" icon="notifications">
             <q-badge color="primary" text-color="white" floating> 2 </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
             <q-menu>
               <q-list>
                 <q-item clickable v-close-popup>
@@ -47,7 +48,6 @@
             <q-avatar size="26px">
               <img src="/img/perfil.png" />
             </q-avatar>
-            <q-tooltip>Account</q-tooltip>
             <q-menu>
               <q-list>
                 <q-item clickable v-close-popup>
@@ -118,7 +118,6 @@ const linksList = [
     icon: "help",
     link: "",
   },
-
 ];
 
 const leftDrawerOpen = ref(true);
