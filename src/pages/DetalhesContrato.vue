@@ -181,7 +181,6 @@
 </template>
 
 <script>
-console.log(`data`);
 // let dataBR = '01/2023';
 // dataBR.split('/');
 // let formatada = dataBR.split('/')[1]+'-'+dataBR.split('/')[0];
