@@ -19,7 +19,7 @@
           <router-link to="/" class="flex">
             <img
               class="logo_prodemge"
-              src="/img/logo_prodemge.png"
+              src="img/logo_prodemge.png"
               alt="logo_prodemge"
             />
           </router-link>
@@ -46,7 +46,7 @@
           <!-- Notificações -->
           <q-btn round flat>
             <q-avatar size="26px">
-              <img src="/img/perfil.png" />
+              <img src="img/perfil.png" />
             </q-avatar>
             <q-menu>
               <q-list>
