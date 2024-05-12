@@ -52,7 +52,7 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
-      publicPath: '/prodemge-teste/dist/spa',
+      publicPath: 'https://okelvincosta.github.io/prodemge-teste/dist/spa',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
