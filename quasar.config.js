@@ -52,6 +52,7 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
+      publicPath: '/prodemge-teste/dist/spa/',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
