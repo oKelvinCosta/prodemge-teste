@@ -52,6 +52,8 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
+      vueRouterMode: 'history',
+      publicPath: 'EssentialLink',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
